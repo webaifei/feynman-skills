@@ -1,17 +1,30 @@
-# Claude Skills
+# Feynman Skills
 
-A curated collection of [Claude Code](https://claude.ai/code) skills for technical writing, AI-assisted development, and consulting analysis.
+> "If you can't explain it simply, you don't understand it well enough." — Richard Feynman
+
+[Claude Code](https://claude.ai/code) skills for creating content that is genuinely easy to understand — covering both **how you write** and **how you present**.
 
 [中文文档](./README.zh.md)
 
 ---
 
+## The Problem This Solves
+
+Most technical content fails at two layers:
+
+- **Content layer** — facts are listed without a unifying frame. Readers know more but don't think differently.
+- **Presentation layer** — ideas are clear but the visual output is rough, making them harder to absorb.
+
+Feynman Skills addresses both. Write the way Feynman taught, present the way great products do.
+
+---
+
 ## Skills Included
 
-| Skill | Trigger | Description |
-|-------|---------|-------------|
-| `technical-writing-craft` | Writing technical articles, blog posts, or explanatory docs | Framework-first writing patterns that make complex ideas memorable |
-| `vibe-coding` | Building software with AI / no-code prototyping | Guide for non-engineers using AI tools to build functional software |
+| Skill | Layer | When to Use |
+|-------|-------|------------|
+| `technical-writing-craft` | **Content** — structure & style | When you want readers to *understand*, not just *know* |
+| `vibe-coding` | **Presentation** — UI & visual | When you want to turn your content into a polished, interactive page |
 
 ---
 
@@ -19,7 +32,7 @@ A curated collection of [Claude Code](https://claude.ai/code) skills for technic
 
 ### Plugin Method (Recommended)
 
-Run these commands inside Claude Code:
+Run inside Claude Code:
 
 ```
 /plugin marketplace add webaifei/feynman-skills
@@ -29,13 +42,7 @@ Run these commands inside Claude Code:
 
 ### Manual Method
 
-For a new project, download directly:
-
-```bash
-curl -o CLAUDE.md https://raw.githubusercontent.com/webaifei/feynman-skills/main/CLAUDE.md
-```
-
-For an existing project, append to your current file:
+Append to your project's `CLAUDE.md`:
 
 ```bash
 echo "" >> CLAUDE.md
@@ -46,75 +53,74 @@ curl https://raw.githubusercontent.com/webaifei/feynman-skills/main/CLAUDE.md >>
 
 ## Usage
 
-Once installed, skills are available automatically. You can also invoke them explicitly:
+The two skills work in sequence:
 
 ```
-/technical-writing-craft
-/vibe-coding
+/technical-writing-craft   ← step 1: structure the content
+/vibe-coding               ← step 2: present it beautifully
 ```
 
-Or mention it in your request:
+Or mention them in your request:
 
-> "Use technical-writing-craft to help me write this article"
+> "Use technical-writing-craft to help me write this article about zero-knowledge proofs, then vibe-code it into a clean HTML page"
 
 ---
 
-## Skills Detail
+## What Each Skill Does
 
-### technical-writing-craft
+### technical-writing-craft — Content Layer
 
-Use when writing technical articles, blog posts, or explanatory documents — especially when explaining complex engineering concepts, analogies, or industry shifts.
+Six patterns that separate writing that *informs* from writing that *changes how you think*:
 
-**Core patterns:**
-- **Framework-First** — find the unifying framework before listing facts
-- **Example pacing** — distant → familiar → present-day, in that order
-- **Anchor sentence** — one sentence that can expand or compress the whole piece
-- **Empathy before correction** — quote the common misconception before reframing it
-- **Identity ending** — close with a role redefinition, not a to-do list
+| Pattern | What it does |
+|---------|-------------|
+| **Framework-First** | Find one frame that makes every fact feel inevitable, not accidental |
+| **Example Pacing** | Distant → familiar → present-day. Train the intuition before making the ask |
+| **Anchor Sentence** | One sentence that can expand to the whole piece or compress back to itself |
+| **Empathy Before Correction** | Quote the common misconception first. Readers open up before they push back |
+| **Identity Ending** | Close with who the reader is now, not what they should do next |
+| **Generation-Verification Gap** | Help readers see their value isn't in producing — it's in judging |
 
-### vibe-coding
+### vibe-coding — Presentation Layer
 
-Use when someone is using AI to generate code, building prototypes without deep technical skills, or exploring how non-engineers can create functional software through natural language.
+Guides you to turn content into functional, polished UI using AI — no deep engineering required:
 
-**Core principles:**
-- Vibe coding is a distinct, learnable skill — not just prompt engineering
-- Replace Figma mockups with functional prototypes built in 30 minutes
-- Build iteratively: break down complex problems into smaller AI-friendly chunks
-- Know the limits: great for MVPs, not for production-critical systems
+| Principle | What it means |
+|-----------|--------------|
+| **Prototype over mockup** | Build a working page in 30 min instead of a Figma static |
+| **Iterative by design** | Break complex UI into small AI-friendly chunks, refine through follow-up |
+| **Know the limits** | Great for articles, landing pages, and docs; production systems still need engineering review |
 
 ---
 
-## Adding a New Skill
+## Adding More Skills
 
-1. Create `skills/<skill-name>/SKILL.md` with this frontmatter:
+1. Create `skills/<skill-name>/SKILL.md`:
 
 ```markdown
 ---
 name: skill-name
-description: One sentence — when to use this skill.
+description: One sentence — when to invoke this skill.
 license: MIT
 ---
 
 # Skill Title
 
-...skill content...
+...content...
 ```
 
-2. Add the path to `.claude-plugin/plugin.json`:
+2. Add to `.claude-plugin/plugin.json`:
 
 ```json
 {
   "skills": [
     "./skills/technical-writing-craft",
-    "./skills/vibe-coding",
     "./skills/your-new-skill"
   ]
 }
 ```
 
-3. Update `.claude-plugin/marketplace.json` version.
-
-4. Commit and push — the skill is live immediately after users run `/reload-plugins`.
+3. Bump version in `marketplace.json`, commit, push.
 
 ---
 
